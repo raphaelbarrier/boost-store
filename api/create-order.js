@@ -14,14 +14,27 @@ module.exports = async (req, res) => {
   const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
   if (!url || !key) return res.status(503).json({error:'Base de données non configurée'});
   const {plan,email,invite,discord,crypto} = req.body || {};
-  if (!['14','28'].includes(plan) || !Object.hasOwn(ADDRESS,crypto) ||
-      typeof email !== 'string' || email.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ||
-      typeof invite !== 'string' || invite.length > 200 || !/^https:\/\/(?:www\.)?(?:discord\.gg|discord\.com\/invite)\/[A-Za-z0-9-]+\/?$/.test(invite) ||
-      (discord != null && (typeof discord !== 'string' || discord.length > 100))) {
-    return res.status(400).json({error:'Informations de commande invalides'});
-  }
-  const record = {product: plan === '14' ? '14_boosts' : '28_boosts', price_eur:plan === '14'?2.60:5.20,
-    email:email.trim(), discord_invite:invite.trim(), crypto, wallet_address:ADDRESS[crypto], status:'pending'};
+  const normalizedPlan = typeof plan === 'string' || typeof plan === 'number' ? String(plan).trim() : '';
+  const normalizedEmail = typeof email === 'string' ? email.trim() : '';
+  const normalizedInvite = typeof invite === 'string' ? invite.trim() : '';
+  const normalizedDiscord = typeof discord === 'string' ? discord.trim() : '';
+  const normalizedCrypto = typeof crypto === 'string' ? crypto.trim().toUpperCase() : '';
+  const invalid = [];
+  if (!['14','28'].includes(normalizedPlan)) invalid.push('plan');
+  if (!Object.hasOwn(ADDRESS, normalizedCrypto)) invalid.push('crypto');
+  if (!normalizedEmail || normalizedEmail.length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) invalid.push('email');
+  if (!normalizedInvite || normalizedInvite.length > 200 || !/^https:\/\/(?:www\.)?(?:discord\.gg|discord\.com\/invite)\/[A-Za-z0-9-]+\/?$/.test(normalizedInvite)) invalid.push('invite');
+  if (discord != null && (typeof discord !== 'string' || normalizedDiscord.length > 100)) invalid.push('discord');
+  if (invalid.length) return res.status(400).json({error:'Informations de commande invalides',fields:invalid});
+  const record = {
+    product: normalizedPlan === '14' ? '14_boosts' : '28_boosts',
+    price_eur: normalizedPlan === '14' ? 2.60 : 5.20,
+    email: normalizedEmail,
+    discord_invite: normalizedInvite,
+    crypto: normalizedCrypto,
+    wallet_address: ADDRESS[normalizedCrypto],
+    status: 'pending'
+  };
   // The supplied schema does not contain a Discord username field, so it is not persisted.
   try {
     const response = await fetch(url.replace(/\/$/,'')+'/rest/v1/orders', {
@@ -33,6 +46,6 @@ module.exports = async (req, res) => {
       console.error('Supabase insert failed',response.status,JSON.stringify(data).slice(0,400));
       return res.status(502).json({error:'Enregistrement de commande impossible'});
     }
-    return res.status(201).json({orderId:data[0].id,status:'pending',priceEur:record.price_eur,crypto,walletAddress:ADDRESS[crypto]});
+    return res.status(201).json({orderId:data[0].id,status:'pending',priceEur:record.price_eur,crypto:normalizedCrypto,walletAddress:ADDRESS[normalizedCrypto]});
   } catch(e) { console.error('Supabase request failed',e.message);return res.status(502).json({error:'Service temporairement indisponible'}); }
 };
