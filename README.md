@@ -1,12 +1,9 @@
-# Koro Shop V3 — Démonstration
+# Koro Shop V4
 
-Site statique multi-pages, responsive, bleu, avec sélection de 14 ou 28 boosts et choix visuel de LTC, ETH ou BTC.
+Version bleu nuit inspirée du premier design, avec neige discrète, titre modifié, navigation multipage et cartes animées.
 
-## Installation
-Importer les fichiers à la racine d’un dépôt GitHub et déployer sur Vercel (Framework: Other). Ouvrir `index.html` pour tester localement.
+Ouvrir `index.html` pour tester ou déposer tous les fichiers à la racine du dépôt GitHub et redéployer sur Vercel.
 
-## Important
-Cette version est une démo. Aucun wallet connecté, aucune adresse de paiement configurée, aucun transfert effectué, aucune validation de paiement et aucune notification Discord. Les données de commande restent dans le sessionStorage du navigateur. Ne jamais traiter cette maquette comme un checkout réel.
+**Important :** les paiements et les notifications Discord ne sont pas connectés. Aucun paiement réel n’est possible. Ne pas afficher une commande comme payée sans vérification côté serveur.
 
-## Pour mise en production
-Ajouter un fournisseur de paiements crypto prenant en charge les réseaux désirés, des webhooks signés et une vérification serveur, puis un bot Discord avec token en variable d’environnement serveur uniquement. Ne jamais exposer de secrets côté navigateur.
+Logo personnalisé : en attente du fichier fourni par le propriétaire.
