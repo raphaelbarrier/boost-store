@@ -15,3 +15,6 @@ Optimisations V7 : icônes de boost plus petites, cartes compactes, meilleur aff
 
 - Titres des offres alignés horizontalement avec leurs logos.
 - Champ obligatoire pour le lien d’invitation Discord, vérifié côté navigateur et inclus au récapitulatif.
+
+
+V8 : adresses publiques LTC, BTC et ETH affichées selon la crypto sélectionnée sur payment.html, bouton de copie. Aucun montant en crypto, paiement confirmé, bot Discord ou suivi blockchain automatique : nécessite une intégration serveur sécurisée. Vérifier la propriété des adresses et le réseau avant publication.
