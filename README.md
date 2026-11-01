@@ -23,3 +23,9 @@ Le prestataire choisi devra fournir une API de facturation, un identifiant de co
 
 ## V13 — Paiement type facture
 Interface à deux colonnes, statut en attente, QR code d'adresse, copie et informations de commande. QR externe généré par api.qrserver.com : ne pas l'utiliser pour un paiement réel sans revue de confidentialité et sans facturation sécurisée. Les cours sont INDICATIFS, pas de montant bloqué. Aucun webhook marchand configuré, aucune confirmation de paiement réelle et aucun DM automatique. Le bouton simulation ne déclenche pas de vrai paiement. Pour activer la production, intégrer un prestataire de paiement éligible, vérifier ses webhooks signés, stocker les commandes côté serveur et envoyer un DM une seule fois après confirmation.
+
+## V14 — Affichage de conversion et aperçu des statuts
+- Après sélection de BTC/ETH/LTC, affichage du prix en euros, du cours de l'unité et de l'équivalent calculé; rafraîchissement toutes les 30 secondes via `/api/rates` sur Vercel.
+- Corrige une erreur JavaScript de V13 liée à un bouton `#to-confirm` inexistant, qui pouvait empêcher la sélection de cryptomonnaie.
+- Aperçu explicite des étapes de paiement **en simulation uniquement**.
+- Les cours sont indicatifs et non bloqués; ils ne constituent pas une facture payable garantie. Pas de surveillance blockchain, pas de validation réelle, pas de DM automatique.
