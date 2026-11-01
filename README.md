@@ -1,13 +1,12 @@
-# Boostly V2 — maquette multipage
+# Koro Shop V3 — Démonstration
 
-Site statique prêt à prévisualiser sur GitHub Pages ou Vercel : `index.html`, `checkout.html`, `payment.html`, `confirm.html`, `about.html`, `style.css`.
+Site statique multi-pages, responsive, bleu, avec sélection de 14 ou 28 boosts et choix visuel de LTC, ETH ou BTC.
 
-## Mise en ligne
+## Installation
+Importer les fichiers à la racine d’un dépôt GitHub et déployer sur Vercel (Framework: Other). Ouvrir `index.html` pour tester localement.
 
-Décompresser le ZIP, importer les fichiers à la racine d'un dépôt GitHub, puis importer le dépôt dans Vercel (Framework Preset: Other).
+## Important
+Cette version est une démo. Aucun wallet connecté, aucune adresse de paiement configurée, aucun transfert effectué, aucune validation de paiement et aucune notification Discord. Les données de commande restent dans le sessionStorage du navigateur. Ne jamais traiter cette maquette comme un checkout réel.
 
-## Limites importantes
-
-Ceci est une **démonstration visuelle** : pas de paiement réel, pas de portefeuille connecté, pas de confirmation blockchain, pas de livraison automatique. Les coordonnées de commande restent dans sessionStorage du navigateur et ne sont envoyées à aucun serveur.
-
-Pour une intégration future, utiliser un prestataire de paiement conforme et un webhook serveur signé, vérifié, idempotent, qui déclenche la notification Discord **uniquement après confirmation de paiement**. Ne jamais stocker de token de bot, secret de webhook ou clé privée dans les fichiers HTML/JS publics. Les notifications Discord nécessitent un bot autorisé, avec permissions adéquates et des MP ouverts par le destinataire.
+## Pour mise en production
+Ajouter un fournisseur de paiements crypto prenant en charge les réseaux désirés, des webhooks signés et une vérification serveur, puis un bot Discord avec token en variable d’environnement serveur uniquement. Ne jamais exposer de secrets côté navigateur.
