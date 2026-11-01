@@ -1,9 +1,12 @@
-# Koro Shop V4
+# MK Shop V5
 
-Version bleu nuit inspirée du premier design, avec neige discrète, titre modifié, navigation multipage et cartes animées.
+Site statique multipage prêt à déployer sur GitHub + Vercel.
 
-Ouvrir `index.html` pour tester ou déposer tous les fichiers à la racine du dépôt GitHub et redéployer sur Vercel.
+- Identité MK Shop sur toutes les pages
+- Logo rose fourni par le client (boost-logo.png, fond rendu transparent)
+- Fond bleu nuit, neige légère, cartes interactives
+- Offres 14 boosts / 1,40 € et 28 boosts / 2,80 €
 
-**Important :** les paiements et les notifications Discord ne sont pas connectés. Aucun paiement réel n’est possible. Ne pas afficher une commande comme payée sans vérification côté serveur.
+**Important :** le site est une interface de présentation. Les paiements crypto et notifications Discord ne sont pas actifs. Ne pas considérer une commande comme payée sans vérification serveur.
 
-Logo personnalisé : en attente du fichier fourni par le propriétaire.
+Déployer les fichiers à la racine du dépôt GitHub puis importer le dépôt sur Vercel (Framework Preset: Other).
