@@ -24,3 +24,12 @@ Le logo Yougata est un SVG original créé pour ce site ; il n’est pas une cop
 - QR codes inversés en blanc sur fond vert nuit via CSS, même comportement pour BTC, ETH et LTC.
 - Neige légèrement plus présente (34 particules) ; titre d’accueil actualisé.
 - Mentions de démonstration retirées de l’accueil et du parcours principal, mais information de sécurité conservée sur la page de paiement : aucun prestataire de paiement ni confirmation automatique n’est actif.
+
+
+## V18 — Supabase : commandes en attente
+- `api/create-order.js` crée une commande `pending` côté serveur à la sélection de la crypto.
+- Variables Vercel nécessaires : `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` (secret serveur), et facultativement `SHOP_ORIGIN` (origine autorisée exacte).
+- La référence Supabase apparaît dans la page de paiement.
+- IMPORTANT : la sélection répétée d'une crypto crée plusieurs commandes `pending` ; une logique de session/idempotence sera nécessaire avant production.
+- Aucun paiement n'est surveillé, détecté ou validé automatiquement dans cette version. Le prix crypto affiché reste indicatif et les adresses sont fixes.
+- Avant ouverture réelle : ajouter limitation de débit, expiration des commandes, suivi blockchain fiable et rapprochement sans ambiguïté des transactions.
