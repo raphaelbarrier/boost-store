@@ -1,16 +1,13 @@
-# Boostly — vitrine Discord boosts
+# Boostly V2 — maquette multipage
 
-Site statique responsive. Ouvrez `index.html` ou déployez sur GitHub Pages / Vercel.
+Site statique prêt à prévisualiser sur GitHub Pages ou Vercel : `index.html`, `checkout.html`, `payment.html`, `confirm.html`, `about.html`, `style.css`.
 
-## État actuel
-- Deux offres : 14 boosts à 1,40 € et 28 boosts à 2,80 €.
-- Sélecteur BTC / ETH / LTC.
-- Aucun paiement réel activé. Aucune transaction ni notification Discord n'est simulée comme payée.
+## Mise en ligne
 
-## Pour activer de vrais paiements
-1. Configurer les adresses publiques BTC, ETH et LTC côté serveur (jamais les clés privées).
-2. Utiliser un prestataire de paiement crypto compatible avec les trois réseaux, disposant d'une API et de webhooks signés. Vérifier les conditions d'âge et de service.
-3. Créer des commandes côté serveur avec montant crypto exact, expiration et identifiant unique.
-4. Vérifier les signatures des webhooks et la confirmation blockchain; prévenir les doubles notifications et transactions réutilisées.
-5. Utiliser un bot Discord côté serveur (jeton dans une variable d'environnement) pour envoyer un DM à l'ID utilisateur 1524540831183143184. Un DM peut échouer selon les paramètres de confidentialité.
-6. Ne livrer qu'après paiement vérifié et s'assurer que la fourniture des boosts respecte les règles Discord.
+Décompresser le ZIP, importer les fichiers à la racine d'un dépôt GitHub, puis importer le dépôt dans Vercel (Framework Preset: Other).
+
+## Limites importantes
+
+Ceci est une **démonstration visuelle** : pas de paiement réel, pas de portefeuille connecté, pas de confirmation blockchain, pas de livraison automatique. Les coordonnées de commande restent dans sessionStorage du navigateur et ne sont envoyées à aucun serveur.
+
+Pour une intégration future, utiliser un prestataire de paiement conforme et un webhook serveur signé, vérifié, idempotent, qui déclenche la notification Discord **uniquement après confirmation de paiement**. Ne jamais stocker de token de bot, secret de webhook ou clé privée dans les fichiers HTML/JS publics. Les notifications Discord nécessitent un bot autorisé, avec permissions adéquates et des MP ouverts par le destinataire.
