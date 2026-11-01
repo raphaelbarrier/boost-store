@@ -1,24 +1,10 @@
-# MK Shop V7
+# MK Shop V10 — correctif des cours
 
-Site statique multipage prêt à déployer sur GitHub + Vercel.
+## Déploiement
+Importer **tous** les fichiers et le dossier `api/` à la racine du dépôt GitHub, puis déployer sur Vercel avec Framework Preset = Other. Ne pas ouvrir `payment.html` localement : la route `/api/rates` exige un déploiement Vercel.
 
-- Identité MK Shop sur toutes les pages
-- Logo rose fourni par le client (boost-logo.png, fond rendu transparent)
-- Fond bleu nuit, neige légère, cartes interactives
-- Offres 14 boosts / 1,40 € et 28 boosts / 2,80 €
+## Test
+Visiter `https://VOTRE-DOMAINE.vercel.app/api/rates` : la réponse doit contenir `prices.BTC`, `prices.ETH` et `prices.LTC` (valeurs en euros pour une unité de crypto). Puis tester la page de paiement.
 
-**Important :** le site est une interface de présentation. Les paiements crypto et notifications Discord ne sont pas actifs. Ne pas considérer une commande comme payée sans vérification serveur.
-
-Déployer les fichiers à la racine du dépôt GitHub puis importer le dépôt sur Vercel (Framework Preset: Other).
-
-Optimisations V7 : icônes de boost plus petites, cartes compactes, meilleur affichage mobile, focus clavier visible et neige allégée.
-
-- Titres des offres alignés horizontalement avec leurs logos.
-- Champ obligatoire pour le lien d’invitation Discord, vérifié côté navigateur et inclus au récapitulatif.
-
-
-V8 : adresses publiques LTC, BTC et ETH affichées selon la crypto sélectionnée sur payment.html, bouton de copie. Aucun montant en crypto, paiement confirmé, bot Discord ou suivi blockchain automatique : nécessite une intégration serveur sécurisée. Vérifier la propriété des adresses et le réseau avant publication.
-
-
-## V9 — Conversion crypto indicative
-La page payment.html interroge l’API publique CoinGecko pour convertir 1,40 € ou 2,80 € en BTC, ETH ou LTC et rafraîchit le taux toutes les 30 secondes. Si l’API échoue ou le cours est trop ancien, aucun montant n’est présenté. Les montants ne sont pas verrouillés, les frais réseau sont exclus, et le site ne vérifie **aucun paiement**. Ne pas accepter de commandes réelles avant intégration serveur d’un prestataire de paiement et confirmation on-chain.
+## Limites
+Les cours sont indicatifs, recalculés régulièrement et non bloqués. Aucun paiement n'est vérifié. Les frais de réseau ne sont pas inclus. Ne pas traiter une commande comme payée sans vérification indépendante. Ne jamais mettre de secrets dans le code public.
