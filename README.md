@@ -1,40 +1,19 @@
-# MK Shop V12 — Connexion Discord préparée
+# Yougata Shop — V16 (Winter Edition)
 
-## Fonctionnel
-- Le site et son mode simulation V11 sont conservés.
-- `POST /api/discord-test` permet d'envoyer un **vrai DM de test** au compte Discord `1524540831183143184`, après configuration du bot. Le texte indique clairement qu'il ne s'agit pas d'un paiement.
-- `api/payment-webhook.js` reste **désactivé** : aucun prestataire de paiement n'a encore été choisi/configuré. Aucun paiement réel n'est confirmé.
+Site statique prêt à déployer sur GitHub et Vercel. Nouvelle identité Yougata (rouge, vert sapin, ambiance hivernale), logo SVG original, offres 14 boosts à 2,60 € et 28 boosts à 5,20 €.
 
-## Configuration Discord sur Vercel
-1. Créer un bot dans Discord Developer Portal et l'inviter sur un serveur commun avec le destinataire.
-2. Dans Vercel > Project > Settings > Environment Variables, ajouter `DISCORD_BOT_TOKEN` (token privé du bot) et `ADMIN_TEST_SECRET` (secret aléatoire long, distinct du token).
-3. Redéployer le site.
-4. Depuis un terminal administrateur, tester (remplacer le domaine et le secret) :
+## Important — sécurité et paiements
+- Les paiements restent en **démonstration** : aucun prestataire n’est connecté, aucune transaction n’est surveillée et aucune commande ne doit être considérée payée.
+- Le calcul des cours crypto est **indicatif**, pas une facture avec taux garanti.
+- Le DM Discord **de test** fonctionne uniquement avec `DISCORD_BOT_TOKEN` et `ADMIN_TEST_SECRET` définis sur Vercel. L’endpoint `/api/discord-test` requiert un POST authentifié.
+- N’ajoutez jamais de secrets à GitHub, ni dans les fichiers HTML/JS.
+- La route `/api/payment-webhook` est un placeholder désactivé ; n’activez pas de confirmation de paiement sans prestataire et validation cryptographique des webhooks.
+- Le fichier `vercel.json` applique des en-têtes de sécurité, contre certains risques courants (anti-iframe, MIME, HTTPS, permissions). Une CSP stricte nécessitera de supprimer les styles inline existants.
+- Contrôlez le déploiement sur Vercel et testez le parcours après installation.
 
-```bash
-curl -X POST 'https://VOTRE-DOMAINE.vercel.app/api/discord-test' -H 'x-admin-secret: VOTRE_SECRET'
-```
+## Installation
+1. Décompresser ce ZIP et copier tous les fichiers, y compris `api/`, à la racine du dépôt GitHub.
+2. Déployer sur Vercel.
+3. Vérifier la page d’accueil, les deux prix, les formulaires, les cours indicatifs et le test Discord.
 
-**Ne pas placer ces secrets dans les fichiers HTML/JS ni les partager.** Ne pas exposer l'endpoint de test publiquement avec le secret. Le destinataire doit autoriser les DM du bot (parfois les paramètres de confidentialité empêchent l'envoi).
-
-## Paiements réels — reste à connecter
-Le prestataire choisi devra fournir une API de facturation, un identifiant de commande, et des webhooks signés. Il faudra stocker les commandes dans une base de données persistante et vérifier la signature, le montant, la devise, le statut et les doublons côté serveur avant d'envoyer un DM de confirmation. Les comptes marchands peuvent être soumis à des conditions d'âge, d'activité et de frais minimum. Ne pas accepter de paiement réel tant que ce parcours n'est pas validé.
-
-
-## V13 — Paiement type facture
-Interface à deux colonnes, statut en attente, QR code d'adresse, copie et informations de commande. QR externe généré par api.qrserver.com : ne pas l'utiliser pour un paiement réel sans revue de confidentialité et sans facturation sécurisée. Les cours sont INDICATIFS, pas de montant bloqué. Aucun webhook marchand configuré, aucune confirmation de paiement réelle et aucun DM automatique. Le bouton simulation ne déclenche pas de vrai paiement. Pour activer la production, intégrer un prestataire de paiement éligible, vérifier ses webhooks signés, stocker les commandes côté serveur et envoyer un DM une seule fois après confirmation.
-
-## V14 — Affichage de conversion et aperçu des statuts
-- Après sélection de BTC/ETH/LTC, affichage du prix en euros, du cours de l'unité et de l'équivalent calculé; rafraîchissement toutes les 30 secondes via `/api/rates` sur Vercel.
-- Corrige une erreur JavaScript de V13 liée à un bouton `#to-confirm` inexistant, qui pouvait empêcher la sélection de cryptomonnaie.
-- Aperçu explicite des étapes de paiement **en simulation uniquement**.
-- Les cours sont indicatifs et non bloqués; ils ne constituent pas une facture payable garantie. Pas de surveillance blockchain, pas de validation réelle, pas de DM automatique.
-
-## V15 — Test de DM Discord sans console
-- Page administrateur : `/admin-test.html` (non liée dans le menu, mais **pas** protégée par authentification de page).
-- Le formulaire demande `ADMIN_TEST_SECRET` et effectue un POST HTTPS vers `/api/discord-test`.
-- Le secret n'est pas enregistré dans le stockage du navigateur ni dans l'URL, et le champ est vidé après envoi.
-- Le serveur compare le secret et envoie un DM de test via `DISCORD_BOT_TOKEN` au compte `1524540831183143184`.
-- Ne jamais partager le secret. Les tentatives restent possibles depuis Internet : pour un usage prolongé, ajouter une limitation de débit et une authentification administrateur côté serveur.
-- Un résultat `200` signifie que Discord a accepté l'envoi, pas que le destinataire a lu le message.
-- Aucune transaction ni commande n'est confirmée par ce test.
+Le logo Yougata est un SVG original créé pour ce site ; il n’est pas une copie du visuel de référence.

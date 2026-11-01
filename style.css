@@ -56,3 +56,25 @@ body{overflow-x:hidden}img{max-width:100%}
 
 /* V15 — page de test Discord réservée à l'administrateur */
 .admin-test-page{max-width:720px;margin:65px auto 110px;padding:0 20px}.admin-test-panel{padding:clamp(22px,5vw,38px)}.admin-test-panel h1{font-size:clamp(24px,4vw,34px);margin:12px 0 16px}.admin-test-panel>p{color:#b7c8e8;line-height:1.65}.admin-test-panel form{margin-top:26px;display:grid;gap:12px}.admin-test-panel label{font-weight:700}.admin-test-panel input{width:100%;min-height:50px;padding:13px 15px;border-radius:11px;background:#0b1630;border:1px solid #6074a2;color:#fff;font:inherit;box-sizing:border-box}.admin-test-panel input:focus{outline:2px solid #7196ff;outline-offset:2px}.admin-hint{font-size:12px;color:#9cb0d6!important;line-height:1.55}.admin-result{padding:14px;border-radius:10px;background:#111f42;border:1px solid #354b79;overflow-wrap:anywhere;margin-top:22px!important}.admin-test-panel button:disabled{opacity:.65;cursor:wait}
+
+/* Yougata Winter Edition — custom visual layer */
+:root{color-scheme:dark;--you-red:#ed334b;--you-red-soft:#ff7180;--you-green:#14352a;--you-gold:#f6d48b}
+html{scroll-behavior:smooth}
+body{background:radial-gradient(ellipse 75% 45% at 50% 5%,#29352d 0%,transparent 70%),radial-gradient(ellipse 45% 35% at 95% 80%,#3b1823 0%,transparent 80%),#0b1212;color:#f8f5f3}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background:repeating-linear-gradient(115deg,transparent 0 48px,#f6e8df 49px,transparent 50px 100px);z-index:-1}
+header{background:rgba(10,19,17,.87);border-bottom:1px solid rgba(239,93,99,.22);backdrop-filter:blur(16px)}
+.brand{letter-spacing:.06em;font-weight:900}.brand b{background:linear-gradient(110deg,#fff,#ff818a,#f1c37a);background-clip:text;-webkit-background-clip:text;color:transparent}
+.brand-logo{border-radius:11px;box-shadow:0 0 20px #e33b4b44}
+.hero{position:relative}.hero:before{content:"❄  YOUGATA WINTER EDITION  ❄";display:block;font-size:.7rem;letter-spacing:.25em;color:#f1c98d;margin-bottom:15px;font-weight:900}
+.hero h1 em{background:linear-gradient(95deg,#fff,#ff6974,#f6c57e);-webkit-background-clip:text;background-clip:text;color:transparent;font-style:normal}
+.pill,.eyebrow{color:#f9a6ad!important}.pill{border:1px solid #f166764a;background:#55232c55}
+.card,.panel,.pay-aside,.pay-invoice,.quote-box,.bottom-strip,.notice{background:linear-gradient(155deg,rgba(34,49,42,.96),rgba(25,26,30,.97))!important;border-color:#a65a5b66!important;box-shadow:0 14px 44px #0005}
+.card.featured{border-color:#f08d91!important;box-shadow:0 15px 42px #d9374d24}
+.card:hover{transform:translateY(-6px);border-color:#ff8c91!important;box-shadow:0 22px 50px #f54b5833}
+.btn{background:linear-gradient(105deg,#ad1e32,#e84858 60%,#ff6971)!important;color:#fff!important;box-shadow:0 8px 22px #ac26374d;transition:transform .2s,filter .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.08);box-shadow:0 11px 28px #d72d4566}
+.tag{background:#642a34!important;color:#ffb5b8!important}.price{color:#fff}.price small{color:#d9c6c5}
+.coin{background:#161e1e!important;border-color:#685255!important}.coin:hover,.coin.active,.coin.selected{border-color:#f27d86!important;background:#322529!important}
+input{background:#101b1b!important;border-color:#72555a!important;color:#fff!important}input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #ffb0b3!important;outline-offset:3px}
+footer{border-top:1px solid #7e3a4566} .dot,.pay-status i{background:#6bd6a4!important}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
