@@ -29,3 +29,12 @@ Interface à deux colonnes, statut en attente, QR code d'adresse, copie et infor
 - Corrige une erreur JavaScript de V13 liée à un bouton `#to-confirm` inexistant, qui pouvait empêcher la sélection de cryptomonnaie.
 - Aperçu explicite des étapes de paiement **en simulation uniquement**.
 - Les cours sont indicatifs et non bloqués; ils ne constituent pas une facture payable garantie. Pas de surveillance blockchain, pas de validation réelle, pas de DM automatique.
+
+## V15 — Test de DM Discord sans console
+- Page administrateur : `/admin-test.html` (non liée dans le menu, mais **pas** protégée par authentification de page).
+- Le formulaire demande `ADMIN_TEST_SECRET` et effectue un POST HTTPS vers `/api/discord-test`.
+- Le secret n'est pas enregistré dans le stockage du navigateur ni dans l'URL, et le champ est vidé après envoi.
+- Le serveur compare le secret et envoie un DM de test via `DISCORD_BOT_TOKEN` au compte `1524540831183143184`.
+- Ne jamais partager le secret. Les tentatives restent possibles depuis Internet : pour un usage prolongé, ajouter une limitation de débit et une authentification administrateur côté serveur.
+- Un résultat `200` signifie que Discord a accepté l'envoi, pas que le destinataire a lu le message.
+- Aucune transaction ni commande n'est confirmée par ce test.
