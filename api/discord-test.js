@@ -13,7 +13,7 @@ module.exports = async function handler(req,res){
     const channelResp=await fetch('https://discord.com/api/v10/users/@me/channels',{method:'POST',headers,body:JSON.stringify({recipient_id:STAFF_ID})});
     if(!channelResp.ok)throw new Error(`Ouverture DM refusée (${channelResp.status})`);
     const channel=await channelResp.json();
-    const sendResp=await fetch(`https://discord.com/api/v10/channels/${channel.id}/messages`,{method:'POST',headers,body:JSON.stringify({content:'🧪 **MK Shop — Test de notification**\nCe message vérifie uniquement la connexion du bot Discord. **Aucun paiement n’a été reçu ni confirmé.**',allowed_mentions:{parse:[]}})});
+    const sendResp=await fetch(`https://discord.com/api/v10/channels/${channel.id}/messages`,{method:'POST',headers,body:JSON.stringify({content:'🧪 **Yougata Shop — Test de notification**\nCe message vérifie uniquement la connexion du bot Discord. **Aucun paiement n’a été reçu ni confirmé.**',allowed_mentions:{parse:[]}})});
     if(!sendResp.ok)throw new Error(`Envoi DM refusé (${sendResp.status})`);
     return res.status(200).json({ok:true,message:'DM de test envoyé.'});
   }catch(e){return res.status(502).json({error:e.message})}

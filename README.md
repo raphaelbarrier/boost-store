@@ -17,3 +17,10 @@ Site statique prêt à déployer sur GitHub et Vercel. Nouvelle identité Yougat
 3. Vérifier la page d’accueil, les deux prix, les formulaires, les cours indicatifs et le test Discord.
 
 Le logo Yougata est un SVG original créé pour ce site ; il n’est pas une copie du visuel de référence.
+
+
+## V17
+- Logo Yougata SVG redessiné ; thème et pied de page harmonisés.
+- QR codes inversés en blanc sur fond vert nuit via CSS, même comportement pour BTC, ETH et LTC.
+- Neige légèrement plus présente (34 particules) ; titre d’accueil actualisé.
+- Mentions de démonstration retirées de l’accueil et du parcours principal, mais information de sécurité conservée sur la page de paiement : aucun prestataire de paiement ni confirmation automatique n’est actif.

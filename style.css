@@ -78,3 +78,17 @@ header{background:rgba(10,19,17,.87);border-bottom:1px solid rgba(239,93,99,.22)
 input{background:#101b1b!important;border-color:#72555a!important;color:#fff!important}input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #ffb0b3!important;outline-offset:3px}
 footer{border-top:1px solid #7e3a4566} .dot,.pay-status i{background:#6bd6a4!important}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* V17 — unified winter palette, QR and footer polish */
+:root{--winter-bg:#0b1212;--winter-panel:#1c2925;--winter-line:#7e3a4566}
+html{background:var(--winter-bg)}
+body{background:radial-gradient(ellipse 75% 45% at 50% 5%,#29352d 0%,transparent 70%),radial-gradient(ellipse 45% 35% at 95% 80%,#3b1823 0%,transparent 80%),var(--winter-bg)}
+footer{background:var(--winter-bg)!important;border-top:1px solid var(--winter-line)!important;color:#b8b5b5!important}
+.bottom-strip{background:linear-gradient(155deg,rgba(34,49,42,.96),rgba(25,26,30,.97))!important;border-color:var(--winter-line)!important;color:#d1c6c4!important}
+.qr-area{background:#1c2925!important;color:#f5efec!important;border:1px solid #6c5557;min-height:242px;overflow:hidden}
+.qr-area img{display:block;background:transparent;filter:invert(1);mix-blend-mode:screen;border-radius:3px;max-width:85%;height:auto}
+.qr-area small{color:#c5c6c1!important;text-align:center;padding:0 10px}
+.payment-disclaimer{font-size:12px;color:#b9b6b4;line-height:1.55;margin:20px 4px}
+.brand-logo{width:44px;height:44px;object-fit:contain}
+.hero:before{content:"YOUGATA · WINTER EDITION";letter-spacing:.21em}
+@media(max-width:650px){.qr-area{min-height:220px}.brand-logo{width:36px;height:36px}}
