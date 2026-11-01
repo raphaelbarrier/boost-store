@@ -18,3 +18,7 @@ Optimisations V7 : icônes de boost plus petites, cartes compactes, meilleur aff
 
 
 V8 : adresses publiques LTC, BTC et ETH affichées selon la crypto sélectionnée sur payment.html, bouton de copie. Aucun montant en crypto, paiement confirmé, bot Discord ou suivi blockchain automatique : nécessite une intégration serveur sécurisée. Vérifier la propriété des adresses et le réseau avant publication.
+
+
+## V9 — Conversion crypto indicative
+La page payment.html interroge l’API publique CoinGecko pour convertir 1,40 € ou 2,80 € en BTC, ETH ou LTC et rafraîchit le taux toutes les 30 secondes. Si l’API échoue ou le cours est trop ancien, aucun montant n’est présenté. Les montants ne sont pas verrouillés, les frais réseau sont exclus, et le site ne vérifie **aucun paiement**. Ne pas accepter de commandes réelles avant intégration serveur d’un prestataire de paiement et confirmation on-chain.

@@ -46,3 +46,5 @@ body{overflow-x:hidden}img{max-width:100%}
 .field-help{display:block;margin:-8px 0 17px;color:#aebcdb;font-size:12px;line-height:1.5}
 
 .wallet-panel{margin:22px 0;padding:19px;border-radius:16px;background:#0a1530;border:1px solid #49649e}.wallet-panel[hidden]{display:none}.wallet-panel p{color:#cad6f5}.wallet-address{padding:15px 12px;margin:13px 0 15px;border:1px solid #6074a2;border-radius:10px;overflow-wrap:anywhere;font-family:ui-monospace,monospace;font-size:14px;color:#fff;background:#101f43;user-select:all}.wallet-panel .btn{margin-bottom:12px}
+
+.quote-box{margin:18px 0;padding:20px;border:1px solid rgba(125,165,255,.3);border-radius:16px;background:rgba(40,78,145,.15)}.quote-box #crypto-amount{display:block;font-size:clamp(1.2rem,3vw,1.8rem);overflow-wrap:anywhere;margin:12px 0;color:#eaf2ff}.quote-box .btn{margin-top:9px}.quote-box #quote-status{margin:12px 0 0}.quote-box .field-help{line-height:1.6}
