@@ -1,4 +1,4 @@
-# MK Shop V5
+# MK Shop V6
 
 Site statique multipage prêt à déployer sur GitHub + Vercel.
 
@@ -10,3 +10,5 @@ Site statique multipage prêt à déployer sur GitHub + Vercel.
 **Important :** le site est une interface de présentation. Les paiements crypto et notifications Discord ne sont pas actifs. Ne pas considérer une commande comme payée sans vérification serveur.
 
 Déployer les fichiers à la racine du dépôt GitHub puis importer le dépôt sur Vercel (Framework Preset: Other).
+
+Optimisations V6 : icônes de boost plus petites, cartes compactes, meilleur affichage mobile, focus clavier visible et neige allégée.
