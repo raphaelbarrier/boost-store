@@ -19,3 +19,7 @@ curl -X POST 'https://VOTRE-DOMAINE.vercel.app/api/discord-test' -H 'x-admin-sec
 
 ## Paiements réels — reste à connecter
 Le prestataire choisi devra fournir une API de facturation, un identifiant de commande, et des webhooks signés. Il faudra stocker les commandes dans une base de données persistante et vérifier la signature, le montant, la devise, le statut et les doublons côté serveur avant d'envoyer un DM de confirmation. Les comptes marchands peuvent être soumis à des conditions d'âge, d'activité et de frais minimum. Ne pas accepter de paiement réel tant que ce parcours n'est pas validé.
+
+
+## V13 — Paiement type facture
+Interface à deux colonnes, statut en attente, QR code d'adresse, copie et informations de commande. QR externe généré par api.qrserver.com : ne pas l'utiliser pour un paiement réel sans revue de confidentialité et sans facturation sécurisée. Les cours sont INDICATIFS, pas de montant bloqué. Aucun webhook marchand configuré, aucune confirmation de paiement réelle et aucun DM automatique. Le bouton simulation ne déclenche pas de vrai paiement. Pour activer la production, intégrer un prestataire de paiement éligible, vérifier ses webhooks signés, stocker les commandes côté serveur et envoyer un DM une seule fois après confirmation.
