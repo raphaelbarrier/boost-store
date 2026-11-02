@@ -14,7 +14,22 @@ module.exports=async(req,res)=>{
   const [o]=await r.json();
   if(!o)return res.status(404).json({error:'Commande introuvable'});
   if(!o.payment_tx_hash||!re.test(o.payment_tx_hash))return res.status(409).json({error:'Aucun TXID soumis'});
-  if(!['BTC','LTC'].includes(o.crypto))return res.status(200).json({found:null,confirmed:false,reason:'Vérification ETH non configurée',status:o.status});
+  if(o.crypto==='ETH'){
+   // Blockscout public Ethereum mainnet API. Informational lookup only.
+   const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),7000);
+   let response;
+   try{response=await fetch('https://eth.blockscout.com/api/v2/transactions/0x'+o.payment_tx_hash,{signal:controller.signal,headers:{Accept:'application/json'}});}finally{clearTimeout(timer)}
+   if(response.status===404)return res.status(200).json({found:false,confirmed:false,status:o.status,reason:'Transaction ETH introuvable sur Ethereum mainnet'});
+   if(!response.ok)return res.status(502).json({error:'Explorateur Ethereum indisponible'});
+   const tx=await response.json();
+   const recipient=String(tx.to?.hash||tx.to?.address||'').toLowerCase();
+   const matches=recipient===String(o.wallet_address||'').toLowerCase();
+   const amountWei=BigInt(String(tx.value||'0'));
+   const received=matches?Number(amountWei)/1e18:0;
+   const success=tx.status==='ok';
+   return res.status(200).json({found:true,confirmations:Number(tx.confirmations||0),receivedCrypto:received,recipientMatches:matches,network:'Ethereum mainnet',transactionSuccessful:success,status:o.status,confirmed:false,reason:'Lecture seule : les paiements ERC-20 et contrats ne sont pas couverts. Montant, taux, unicité et attribution de commande non validés.'});
+  }
+  if(!['BTC','LTC'].includes(o.crypto))return res.status(400).json({error:'Réseau non pris en charge'});
   // BlockCypher public API; informational only, cannot attribute a shared-address transfer to an order.
   const network=o.crypto==='BTC'?'btc/main':'ltc/main';
   const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),7000);
