@@ -102,3 +102,34 @@ footer{background:var(--winter-bg)!important;border-top:1px solid var(--winter-l
 /* V26: realistic metallic Y transparent */
 .brand-logo,.boost-icon{object-fit:contain;background:transparent;box-shadow:none;border-radius:0;filter:drop-shadow(0 3px 5px rgba(0,0,0,.4));}
 .boost-icon{padding:2px;}
+
+
+/* V27 — premium graphite / ice / electric violet */
+:root{--you-red:#8b7bff;--you-red-soft:#b9b1ff;--you-green:#171b28;--you-gold:#b6d9ff;--winter-bg:#080b12;--winter-panel:#151b28;--winter-line:#ffffff19;color-scheme:dark}
+html{background:#080b12}
+body{background:radial-gradient(ellipse 60% 42% at 48% -10%,#343050 0%,transparent 75%),radial-gradient(ellipse 45% 38% at 100% 70%,#12283b 0%,transparent 75%),#080b12;color:#f6f7ff}
+body:before{opacity:.055;background:repeating-linear-gradient(115deg,transparent 0 75px,#d7e3ff 76px,transparent 77px 150px)}
+header{background:rgba(10,13,23,.78);border-color:#ffffff1a;box-shadow:0 8px 35px #0003}
+footer{background:#080b12!important;border-color:#ffffff1c!important;color:#9aa8be!important}
+.brand b{background:linear-gradient(115deg,#f9fbff,#c8d5ff,#a99cff);background-clip:text;-webkit-background-clip:text;color:transparent}
+.brand-logo{box-shadow:none;border-radius:0;filter:drop-shadow(0 5px 10px #0009)}
+.hero:before{content:"YOUGATA · DIGITAL STORE";color:#b7aefb;letter-spacing:.24em}
+.hero h1 em{background:linear-gradient(105deg,#e5ebff,#b7a7ff,#80caff);background-clip:text;-webkit-background-clip:text;color:transparent}
+.pill{background:#8272e01a;border:1px solid #a89aff50;color:#d5ceff!important}
+.eyebrow{color:#aaa5ff!important}
+.card,.panel,.pay-aside,.pay-invoice,.quote-box,.bottom-strip,.notice{background:linear-gradient(145deg,rgba(26,32,47,.97),rgba(14,19,31,.98))!important;border:1px solid #ffffff1e!important;box-shadow:0 18px 55px #0005}
+.card.featured{border-color:#a69aff77!important;box-shadow:0 20px 55px #7367b41f}
+.card:hover{border-color:#b7adff!important;box-shadow:0 24px 58px #6c6cdd25}
+.btn{background:linear-gradient(110deg,#665bdb,#8878f6 55%,#659bfa)!important;box-shadow:0 10px 28px #635bde3b;color:#fff!important}
+.btn:hover{box-shadow:0 13px 32px #635bde60}
+.tag{background:#8574eb20!important;color:#cfc5ff!important;border:1px solid #8e81ea35}
+.coin{background:#101723!important;border-color:#ffffff2b!important}
+.coin:hover,.coin.active,.coin.selected{background:#24233c!important;border-color:#a59cff!important}
+input{background:#101723!important;border-color:#ffffff35!important;color:#f6f7ff!important}
+input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #a9baff!important;outline-offset:3px}
+.wallet-panel,.wallet-address,.admin-result{background:#121c2b;border-color:#ffffff30}
+.qr-area{background:#171e2b!important;border-color:#ffffff28!important;color:#eef2ff!important}
+.qr-area small{color:#acb7cb!important}
+.bottom-strip{color:#b5c1d5!important}.dot,.pay-status i{background:#6fe0b6!important}
+.snowflake{opacity:.18;background:#d7e8ff}
+@media(max-width:650px){header{backdrop-filter:blur(12px)}.card,.panel{border-radius:19px}}
