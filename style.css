@@ -92,3 +92,9 @@ footer{background:var(--winter-bg)!important;border-top:1px solid var(--winter-l
 .brand-logo{width:44px;height:44px;object-fit:contain}
 .hero:before{content:"YOUGATA · WINTER EDITION";letter-spacing:.21em}
 @media(max-width:650px){.qr-area{min-height:220px}.brand-logo{width:36px;height:36px}}
+
+/* V24 — metallic Yougata identity */
+.brand-logo{object-fit:contain;filter:drop-shadow(0 2px 3px rgba(0,0,0,.4));}
+.boost-icon{object-fit:contain;filter:drop-shadow(0 2px 3px rgba(0,0,0,.32));}
+.brand:focus-visible,.btn:focus-visible,.coin:focus-visible{outline:3px solid #c8d9e3;outline-offset:4px;}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important;}}
