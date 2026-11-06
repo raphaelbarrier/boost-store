@@ -1,3 +1,33 @@
-(()=>{const btn=document.getElementById('submit-tx');if(!btn)return;btn.addEventListener('click',async()=>{const out=document.getElementById('tx-result');const orderId=sessionStorage.getItem('yougataPendingOrderId');const txHash=document.getElementById('tx-hash').value.trim();if(!orderId){out.textContent='Sélectionnez une cryptomonnaie et attendez la création de la commande.';return;}if(!/^(?:0x)?[a-f0-9]{64}$/i.test(txHash)){out.textContent='Le TXID doit contenir 64 caractères hexadécimaux (préfixe 0x facultatif).';return;}btn.disabled=true;out.textContent='Enregistrement en cours…';try{const r=await fetch('/api/submit-transaction',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({orderId,txHash})});const data=await r.json();out.textContent=data.message||data.error||'Erreur';if(r.ok)window.dispatchEvent(new Event('yougata:tx-submitted'));}catch{out.textContent='Erreur réseau, veuillez réessayer.';}finally{btn.disabled=false;}})})();
-(()=>{const panel=document.getElementById('tx-submit-panel');if(!panel)return;const b=document.createElement('button');b.className='btn wide';b.type='button';b.textContent='Consulter la transaction sur la blockchain';b.style.marginTop='12px';const p=document.createElement('p');p.className='field-help';p.setAttribute('aria-live','polite');panel.append(b,p);b.onclick=async()=>{const orderId=sessionStorage.getItem('yougataPendingOrderId');if(!orderId){p.textContent='Aucune commande enregistrée.';return;}b.disabled=true;p.textContent='Recherche en cours…';try{const r=await fetch('/api/check-transaction',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({orderId})});const x=await r.json();p.textContent=x.error||(!x.found?'Transaction non trouvée ou vérification indisponible.':'Transaction trouvée · '+x.confirmations+' confirmation(s) · '+(x.recipientMatches?x.receivedCrypto+' '+(document.querySelector('.coin.active')?.dataset.coin||'crypto')+' vers l’adresse de la boutique.':'Adresse destinataire différente de celle de la boutique.')+' Validation de la commande toujours manuelle.');if(x.reason)p.textContent+=' '+x.reason;}catch{p.textContent='Erreur réseau.'}finally{b.disabled=false;}};})();
-(()=>{const panel=document.getElementById('tx-submit-panel');if(!panel)return;const b=document.createElement('button');b.type='button';b.className='btn wide';b.style.marginTop='10px';b.textContent='Vérifier et transmettre au bot Discord';const p=document.createElement('p');p.className='field-help';p.setAttribute('aria-live','polite');panel.append(b,p);b.onclick=async()=>{const orderId=sessionStorage.getItem('yougataPendingOrderId');if(!orderId){p.textContent='Créez une commande et soumettez votre TXID avant de vérifier.';return}b.disabled=true;p.textContent='Vérification sur la blockchain…';try{const r=await fetch('/api/notify-tx-review',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({orderId})});const d=await r.json();p.textContent=d.message||d.error||'Erreur de vérification';}catch{p.textContent='Connexion indisponible.'}finally{b.disabled=false}}})();
+(()=>{
+  const button=document.getElementById('submit-tx');
+  const result=document.getElementById('tx-result');
+  const field=document.getElementById('tx-hash');
+  if(!button||!result||!field)return;
+  const post=async(url,payload)=>{
+    const response=await fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    const data=await response.json().catch(()=>({}));
+    return {response,data};
+  };
+  button.addEventListener('click',async()=>{
+    const orderId=sessionStorage.getItem('yougataPendingOrderId');
+    const txHash=field.value.trim();
+    if(!orderId){result.textContent='Créez votre commande et choisissez une cryptomonnaie avant de valider.';return;}
+    if(!/^(?:0x)?[a-f0-9]{64}$/i.test(txHash)){result.textContent='TXID invalide : saisissez 64 caractères hexadécimaux (0-9, a-f).';return;}
+    button.disabled=true;result.textContent='Enregistrement du TXID…';
+    try{
+      const saved=await post('/api/submit-transaction',{orderId,txHash});
+      if(!saved.response.ok){
+        // A retry is allowed for the same TXID already recorded on this order.
+        const status=await fetch('/api/order-status?orderId='+encodeURIComponent(orderId)).then(r=>r.ok?r.json():null).catch(()=>null);
+        const knownHash=String(status?.payment_tx_hash||'').replace(/^0x/i,'').toLowerCase();
+        if(!(status?.status==='review'&&knownHash===txHash.replace(/^0x/i,'').toLowerCase())){
+          result.textContent=saved.data.error||'Impossible d’enregistrer ce TXID. Vérifiez votre commande.';return;
+        }
+      }else{window.dispatchEvent(new Event('yougata:tx-submitted'));}
+      result.textContent='TXID enregistré. Vérification sur la blockchain en cours…';
+      const checked=await post('/api/notify-tx-review',{orderId});
+      result.textContent=checked.data.message||checked.data.error||'Vérification indisponible. Réessayez plus tard.';
+    }catch{result.textContent='Connexion indisponible. Réessayez dans quelques instants.';}
+    finally{button.disabled=false;}
+  });
+})();

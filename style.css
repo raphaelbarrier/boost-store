@@ -133,3 +133,12 @@ input:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #a9ba
 .bottom-strip{color:#b5c1d5!important}.dot,.pay-status i{background:#6fe0b6!important}
 .snowflake{opacity:.18;background:#d7e8ff}
 @media(max-width:650px){header{backdrop-filter:blur(12px)}.card,.panel{border-radius:19px}}
+
+/* Paiement TXID : disposition lisible et espacements stables */
+#tx-submit-panel{display:flex;flex-direction:column;gap:0}
+#tx-submit-panel label{display:block;margin:18px 0 10px;font-weight:700}
+#tx-submit-panel .tx-input{display:block;box-sizing:border-box;width:100%;min-width:0;padding:15px 16px;margin:0 0 14px;background:#101723;color:#f6f7ff;border:1px solid #ffffff35;border-radius:11px;font-size:15px}
+#tx-submit-panel .tx-validate{display:block;width:100%;min-height:54px;margin:0;border-radius:12px}
+#tx-submit-panel .tx-hint{margin:13px 12px 0;text-align:center;font-size:12px;line-height:1.6;color:#b7c3d8;overflow-wrap:anywhere}
+#tx-submit-panel .tx-feedback{margin:12px 12px 0;text-align:center;font-size:13px;line-height:1.6;color:#d7dcff;overflow-wrap:anywhere}
+#tx-submit-panel .tx-feedback:empty{display:none}
