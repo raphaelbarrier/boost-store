@@ -1,35 +1,25 @@
-# Yougata Shop — V16 (Winter Edition)
+# Yougata Shop — version client sans administration
 
-Site statique prêt à déployer sur GitHub et Vercel. Nouvelle identité Yougata (rouge, vert sapin, ambiance hivernale), logo SVG original, offres 14 boosts à 2,60 € et 28 boosts à 5,20 €.
+Site client complet (HTML/CSS/JS) et fonctions API Vercel. Pas de page d'administration.
 
-## Important — sécurité et paiements
-- Les paiements restent en **démonstration** : aucun prestataire n’est connecté, aucune transaction n’est surveillée et aucune commande ne doit être considérée payée.
-- Le calcul des cours crypto est **indicatif**, pas une facture avec taux garanti.
-- Le DM Discord **de test** fonctionne uniquement avec `DISCORD_BOT_TOKEN` et `ADMIN_TEST_SECRET` définis sur Vercel. L’endpoint `/api/discord-test` requiert un POST authentifié.
-- N’ajoutez jamais de secrets à GitHub, ni dans les fichiers HTML/JS.
-- La route `/api/payment-webhook` est un placeholder désactivé ; n’activez pas de confirmation de paiement sans prestataire et validation cryptographique des webhooks.
-- Le fichier `vercel.json` applique des en-têtes de sécurité, contre certains risques courants (anti-iframe, MIME, HTTPS, permissions). Une CSP stricte nécessitera de supprimer les styles inline existants.
-- Contrôlez le déploiement sur Vercel et testez le parcours après installation.
+## Déploiement
 
-## Installation
-1. Décompresser ce ZIP et copier tous les fichiers, y compris `api/`, à la racine du dépôt GitHub.
-2. Déployer sur Vercel.
-3. Vérifier la page d’accueil, les deux prix, les formulaires, les cours indicatifs et le test Discord.
+1. Décompresser et placer **le contenu** de ce dossier à la racine du dépôt GitHub (index.html à la racine).
+2. Vercel : Framework Preset = Other, Root Directory = racine du dépôt, puis Deploy.
+3. Configurer dans Vercel les variables privées SUPABASE_URL et SUPABASE_SERVICE_ROLE_KEY. Ne jamais mettre ces clés dans le code client.
+4. Dans Supabase, la table `public.orders` doit comporter les colonnes déjà créées lors des versions précédentes (dont payment_tx_hash, payment_submitted_at, discord_notified_at).
+5. Vérifier les parcours de commande et de suivi avec une commande fictive. Ne pas envoyer de cryptomonnaie pour tester.
 
-Le logo Yougata est un SVG original créé pour ce site ; il n’est pas une copie du visuel de référence.
+## Comportement des paiements
 
+- Les adresses BTC/ETH/LTC existantes sont conservées.
+- Un TXID fourni par le client passe la commande en `review`, **jamais** en `paid`.
+- La consultation d'une transaction sur la blockchain n'est pas une attribution fiable à une commande lorsque plusieurs clients paient une même adresse.
+- La validation automatique des paiements et la livraison ne sont **pas activées**. Un service de paiement avec une référence/adresse unique par commande est nécessaire pour un automatisme fiable.
+- L'API `notify-paid` est une fonction serveur protégée pour des commandes **déjà** vérifiées et marquées `paid`; elle n'est pas une preuve de paiement.
 
-## V17
-- Logo Yougata SVG redessiné ; thème et pied de page harmonisés.
-- QR codes inversés en blanc sur fond vert nuit via CSS, même comportement pour BTC, ETH et LTC.
-- Neige légèrement plus présente (34 particules) ; titre d’accueil actualisé.
-- Mentions de démonstration retirées de l’accueil et du parcours principal, mais information de sécurité conservée sur la page de paiement : aucun prestataire de paiement ni confirmation automatique n’est actif.
+## Contrôles
 
-
-## V18 — Supabase : commandes en attente
-- `api/create-order.js` crée une commande `pending` côté serveur à la sélection de la crypto.
-- Variables Vercel nécessaires : `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` (secret serveur), et facultativement `SHOP_ORIGIN` (origine autorisée exacte).
-- La référence Supabase apparaît dans la page de paiement.
-- IMPORTANT : la sélection répétée d'une crypto crée plusieurs commandes `pending` ; une logique de session/idempotence sera nécessaire avant production.
-- Aucun paiement n'est surveillé, détecté ou validé automatiquement dans cette version. Le prix crypto affiché reste indicatif et les adresses sont fixes.
-- Avant ouverture réelle : ajouter limitation de débit, expiration des commandes, suivi blockchain fiable et rapprochement sans ambiguïté des transactions.
+- `node --check` sur les fichiers JS (Node.js installé).
+- Les secrets sont uniquement dans les variables d'environnement Vercel.
+- Ne pas déployer les fichiers de tests locaux ou les archives historiques.
